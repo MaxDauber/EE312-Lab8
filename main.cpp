@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
         for (unsigned int i = 0; i < files.size(); i++) {
             cout << i << files[i] << endl;
         }
-        numSeq = 2;
+        numSeq = 6;
         ifstream myfile;
         for (int i = 2; i < files.size(); i++) {
             string fileptr = "sm_doc_set/" + files[i];
@@ -61,9 +61,8 @@ int main(int argc, char* argv[]) {
             if (myfile.good() && myfile.is_open()) {
                 string word;
                 vector<string> wordQueue;
-                //for (int i = 0; i < 6; i++) {
                    while(!myfile.eof()) {
-                       while (wordQueue.size()<=numSeq && !myfile.eof())// replace 6 with the n word sequence
+                       while (wordQueue.size()<numSeq && !myfile.eof())// replace 6 with the n word sequence
                        {
                            myfile >> word;
                            cleaner(word);
@@ -78,12 +77,6 @@ int main(int argc, char* argv[]) {
                        count++;
                        cout<< endl;
                    }
-                //cleaner(word2);
-                //cout << word2;
-               /* while(!wordQueue.empty()){
-                    cout<<*(wordQueue.begin())<<" ";
-                    wordQueue.erase(wordQueue.begin());
-                } */
 
             } else {
                 cout << "Files not found!";
