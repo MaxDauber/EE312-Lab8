@@ -27,13 +27,14 @@ int getdir (string dir, vector<string> &files)
     closedir(dp);
     return 0;
 }
-void cleaner (string& helo) {//function created to clean up strings and make them all caps
-    for (int i = 0; i < helo.length(); i++) {
-        if (96 < helo[i] && helo[i] < 123) {
-            helo[i] = helo[i] - 32;
+//formats input strings for consistency
+void cleaner (string& str) {
+    for (int i = 0; i < str.length(); i++) {
+        if (96 < str[i] && str[i] < 123) {
+            str[i] = str[i] - 32;
         }
-        if(helo[i]<64 || helo[i]>91){
-            helo.erase(helo.begin()+i);
+        if(str[i]<64 || str[i]>91){
+            str.erase(str.begin()+i);
             i--;
         }
     }
@@ -41,6 +42,7 @@ void cleaner (string& helo) {//function created to clean up strings and make the
 
 int main(int argc, char* argv[]) {
         long long count =0;
+        int numSeq; //number of items in each sequence
         //string dir = argv[1];//string("sm_doc_set");
         string dir = string("sm_doc_set");
         vector<string> files = vector<string>();
@@ -49,44 +51,42 @@ int main(int argc, char* argv[]) {
         for (unsigned int i = 0; i < files.size(); i++) {
             cout << i << files[i] << endl;
         }
-        string Mystring;
+        numSeq = 2;
         ifstream myfile;
         for (int i = 2; i < files.size(); i++) {
             string fileptr = "sm_doc_set/" + files[i];
-//            string fileptr = dir + '/ + files[i];
+//            string fileptr = dir + '/' + files[i];
 
             myfile.open(fileptr.c_str());
             if (myfile.good() && myfile.is_open()) {
-                cout << "good job fam";
-                string mess;
-               // string mess2;
-                vector<string> less;
+                string word;
+                vector<string> wordQueue;
                 //for (int i = 0; i < 6; i++) {
                    while(!myfile.eof()) {
-                       while (less.size()<=6 && !myfile.eof())// replace 6 with the n word sequence
+                       while (wordQueue.size()<=numSeq && !myfile.eof())// replace 6 with the n word sequence
                        {
-                           myfile >> mess;
-                           cleaner(mess);
-                           if (mess.length() != 0) {
-                               less.push_back(mess);
+                           myfile >> word;
+                           cleaner(word);
+                           if (word.length() != 0) {
+                               wordQueue.push_back(word);
                            }
                        }
-                       for(int j=0; j<less.size();j++){
-                           cout<<less[j]<<" ";
+                       for(int j=0; j<wordQueue.size();j++){
+                           cout<<wordQueue[j]<<" ";
                        }
-                       less.erase(less.begin());
+                       wordQueue.erase(wordQueue.begin());
                        count++;
                        cout<< endl;
                    }
-                //cleaner(mess2);
-                //cout << mess2;
-               /* while(!less.empty()){
-                    cout<<*(less.begin())<<" ";
-                    less.erase(less.begin());
+                //cleaner(word2);
+                //cout << word2;
+               /* while(!wordQueue.empty()){
+                    cout<<*(wordQueue.begin())<<" ";
+                    wordQueue.erase(wordQueue.begin());
                 } */
 
             } else {
-                cout << "usuc";
+                cout << "Files not found!";
                 return 0;
             }
             cout << endl;
