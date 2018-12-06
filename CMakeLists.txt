@@ -32,7 +32,8 @@ add_executable(Lab8
         cmake-build-debug/sm_doc_set/sra31.txt
         cmake-build-debug/sm_doc_set/sra42.txt
         cmake-build-debug/sm_doc_set/tyc12.txt
-        ___.cpp
-        main.cpp
         hash.h
+        hash.cpp
+        main.cpp
+
         )

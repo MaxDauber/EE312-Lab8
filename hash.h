@@ -21,7 +21,7 @@ private:
     HashNode * Table [TABLE_SIZE];
 
 public:
-    void hash (string &s);
+    int hash (string &s);
     int * getcollisions(void);
 
 };

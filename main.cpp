@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <queue>
+#include "hash.h"
 
 
 using namespace std;
@@ -51,7 +52,7 @@ int main(int argc, char* argv[]) {
         for (unsigned int i = 0; i < files.size(); i++) {
             cout << i << files[i] << endl;
         }
-        numSeq = 6;
+        numSeq = 2;
         ifstream myfile;
         for (int i = 2; i < files.size(); i++) {
             string fileptr = "sm_doc_set/" + files[i];
@@ -70,8 +71,13 @@ int main(int argc, char* argv[]) {
                                wordQueue.push_back(word);
                            }
                        }
+                       string input;
                        for(int j=0; j<wordQueue.size();j++){
-                           cout<<wordQueue[j]<<" ";
+                           //cout<<wordQueue[j]<<" ";
+                           input += wordQueue[j];
+                           cout << input;
+                           int k = hash(input);
+                           cout << hash(hash);
                        }
                        wordQueue.erase(wordQueue.begin());
                        count++;
