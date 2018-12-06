@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 #include "hash.h"
 
 using namespace std;
@@ -42,11 +43,11 @@ void cleaner (string& str) {
 int main(int argc, char* argv[]) {
 
         Hash * hashTable=new Hash;
-        int numSeq; //number of items in each sequence
-        int minCollisions = 200;
-        //string dir = argv[1];//string("sm_doc_set");
+        int numSeq = atoi(argv[2]); //number of items in each sequence
+        int minCollisions = atoi(argv[3]);
+        string dir = argv[1];//string("sm_doc_set");
 
-        string dir = string("sm_doc_set");
+        //string dir = string("sm_doc_set");
         vector<string> files = vector<string>();
 
         getdir(dir, files);
@@ -57,12 +58,10 @@ int main(int argc, char* argv[]) {
                 i--;
             }
         }
-
-        numSeq = 6;
         ifstream myfile;
         for (int i = 0; i < files.size(); i++) {
-            string fileptr = "sm_doc_set/" + files[i];
-//            string fileptr = dir + '/' + files[i];
+//            string fileptr = "sm_doc_set/" + files[i];
+            string fileptr = dir + '/' + files[i];
 
             myfile.open(fileptr.c_str());
             if (myfile.good() && myfile.is_open()) {
