@@ -9,6 +9,9 @@
 #include "hash.h"
 
 
+#include "hash.h"
+
+
 using namespace std;
 
 
@@ -42,6 +45,9 @@ void cleaner (string& str) {
 }
 
 int main(int argc, char* argv[]) {
+        cout<<"Work1";
+        Hash * mexican=new Hash;
+        cout<<"work";
         long long count =0;
         int numSeq; //number of items in each sequence
         //string dir = argv[1];//string("sm_doc_set");
@@ -78,7 +84,13 @@ int main(int argc, char* argv[]) {
                            cout << input;
                            int k = hash(input);
                            cout << hash(hash);
+
+                       string mystring;
+                       for(int j=0; j<wordQueue.size();j++){
+                           mystring += wordQueue[j];
+
                        }
+                       mexican->hash(mystring,i-2);
                        wordQueue.erase(wordQueue.begin());
                        count++;
                        cout<< endl;
@@ -92,5 +104,7 @@ int main(int argc, char* argv[]) {
             myfile.close();
         }
         cout<<"count is "<<count;
+        mexican->getcollisions(files.size());
+	delete(mexican);
 }
 
