@@ -1,6 +1,8 @@
 #include <string>
 #include <iostream>
+#include <vector>
 #include "hash.h"
+
 
  Hash::Hash(){};
 
@@ -8,7 +10,7 @@ void Hash::hash (string &s,int key){// takes a n word string and then places it 
         int multiplier=1;
         const int mult=7;
         int index=0;
-        cout<<s;
+        //cout<<s;
     for(int i=0; i<s.length(); i+=2){
             multiplier= mult * multiplier;
             index+=(s[i]*multiplier);
@@ -16,10 +18,10 @@ void Hash::hash (string &s,int key){// takes a n word string and then places it 
     index=index%TABLE_SIZE;
 	if(index<0){
 		index=index*-1;}
-		cout<<" " <<index;
+		//cout<<" " <<index;
     HashNode * temp = new HashNode;
     temp->data=key;
-		cout<<" "<< key<< endl;
+		//cout<<" "<< key<< endl;
     if(Table[index]==NULL){
         temp->next=NULL;
         Table[index]=temp;
@@ -33,12 +35,13 @@ void Hash::hash (string &s,int key){// takes a n word string and then places it 
 
 
 
-int * Hash::getcollisions(int numofdocs){//still need to pass in argument with minumin number of collisions to determine cheating,
+int * Hash::getcollisions(int numOfDocs, vector<string> &files, int minCollisions){//still need to pass in argument with minumin number of collisions to determine cheating,
     //also need to print out those entries that have those minimum number of entries
     //ask max if he wants to return the array, and how to.
-    int collisionArr [numofdocs][numofdocs];
-    for(int i=0; i < numofdocs; i++){
-        for (int j=i+1; j< numofdocs; j++){
+    cout << "The following files have collisions: " << endl;
+    int collisionArr [numOfDocs][numOfDocs];
+    for(int i=0; i < numOfDocs; i++){
+        for (int j=i+1; j< numOfDocs; j++){
             collisionArr[j][i]=0;
         }
     }
@@ -59,11 +62,10 @@ int * Hash::getcollisions(int numofdocs){//still need to pass in argument with m
                 delete(cur);
         }
     }
-    for(int i=0; i < numofdocs; i++){
-        for (int j=i+1; j< numofdocs; j++){
-		if(collisionArr[j][i]>200){
-            cout<<"i is: "<<i<<" j is: "<<j<< " ";
-            cout<<collisionArr[j][i]<< endl;
+    for(int i=0; i < numOfDocs; i++){
+        for (int j=i+1; j< numOfDocs; j++){
+		if(collisionArr[j][i]>minCollisions){
+            cout << collisionArr[j][i]<< ": " << files[i] << ", " << files[j] << endl;
 }
         }
     }

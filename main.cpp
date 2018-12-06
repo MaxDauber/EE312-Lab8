@@ -40,22 +40,27 @@ void cleaner (string& str) {
 }
 
 int main(int argc, char* argv[]) {
-        cout<<"Work1";
-        Hash * mexican=new Hash;
-        cout<<"work";
-        long long count =0;
+
+        Hash * hashTable=new Hash;
         int numSeq; //number of items in each sequence
+        int minCollisions = 200;
         //string dir = argv[1];//string("sm_doc_set");
+
         string dir = string("sm_doc_set");
         vector<string> files = vector<string>();
 
         getdir(dir, files);
-        for (unsigned int i = 0; i < files.size(); i++) {
-            cout << i << files[i] << endl;
+
+        for(int i = 0; i < files.size(); i++){
+            if(files[i].substr(0,1) == "."){
+                files.erase(files.begin()+i);
+                i--;
+            }
         }
+
         numSeq = 6;
         ifstream myfile;
-        for (int i = 2; i < files.size(); i++) {
+        for (int i = 0; i < files.size(); i++) {
             string fileptr = "sm_doc_set/" + files[i];
 //            string fileptr = dir + '/' + files[i];
 
@@ -76,21 +81,19 @@ int main(int argc, char* argv[]) {
                        for(int j=0; j<wordQueue.size();j++){
                            mystring += wordQueue[j];
                        }
-                       mexican->hash(mystring,i-2);
+                       hashTable->hash(mystring,i);
                        wordQueue.erase(wordQueue.begin());
-                       count++;
-                       cout<< endl;
+                       //cout<< endl;
                    }
 
-            } else {
+            }
+            else {
                 cout << "Files not found!";
                 return 0;
             }
-            cout << endl;
             myfile.close();
         }
-        cout<<"count is "<<count;
-        mexican->getcollisions(files.size());
-	delete(mexican);
+        hashTable->getcollisions(files.size(), files, minCollisions);
+	delete(hashTable);
 }
 

@@ -20,7 +20,7 @@ private:
 public:
     Hash();
     void hash (string &s, int key);
-    int * getcollisions(int numofdocs);
+    int * getcollisions(int numofdocs, vector<string> &files, int minCollisions);
     ~Hash();
 };
 
