@@ -5,8 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <queue>
-
+#include "hash.h"
 
 using namespace std;
 
@@ -41,6 +40,9 @@ void cleaner (string& str) {
 }
 
 int main(int argc, char* argv[]) {
+        cout<<"Work1";
+        Hash * mexican=new Hash;
+        cout<<"work";
         long long count =0;
         int numSeq; //number of items in each sequence
         //string dir = argv[1];//string("sm_doc_set");
@@ -70,9 +72,11 @@ int main(int argc, char* argv[]) {
                                wordQueue.push_back(word);
                            }
                        }
+                       string mystring;
                        for(int j=0; j<wordQueue.size();j++){
-                           cout<<wordQueue[j]<<" ";
+                           mystring += wordQueue[j];
                        }
+                       mexican->hash(mystring,i-2);
                        wordQueue.erase(wordQueue.begin());
                        count++;
                        cout<< endl;
@@ -86,5 +90,7 @@ int main(int argc, char* argv[]) {
             myfile.close();
         }
         cout<<"count is "<<count;
+        mexican->getcollisions(files.size());
+	delete(mexican);
 }
 
