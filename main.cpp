@@ -5,12 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <queue>
 #include "hash.h"
-
-
-#include "hash.h"
-
 
 using namespace std;
 
@@ -58,7 +53,7 @@ int main(int argc, char* argv[]) {
         for (unsigned int i = 0; i < files.size(); i++) {
             cout << i << files[i] << endl;
         }
-        numSeq = 2;
+        numSeq = 6;
         ifstream myfile;
         for (int i = 2; i < files.size(); i++) {
             string fileptr = "sm_doc_set/" + files[i];
@@ -77,18 +72,9 @@ int main(int argc, char* argv[]) {
                                wordQueue.push_back(word);
                            }
                        }
-                       string input;
-                       for(int j=0; j<wordQueue.size();j++){
-                           //cout<<wordQueue[j]<<" ";
-                           input += wordQueue[j];
-                           cout << input;
-                           int k = hash(input);
-                           cout << hash(hash);
-
                        string mystring;
                        for(int j=0; j<wordQueue.size();j++){
                            mystring += wordQueue[j];
-
                        }
                        mexican->hash(mystring,i-2);
                        wordQueue.erase(wordQueue.begin());

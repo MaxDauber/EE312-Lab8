@@ -2,8 +2,7 @@
 #include <iostream>
 #include "hash.h"
 
-
-Hash::Hash(){};
+ Hash::Hash(){};
 
 void Hash::hash (string &s,int key){// takes a n word string and then places it into the hash map
         int multiplier=1;
@@ -68,7 +67,7 @@ int * Hash::getcollisions(int numofdocs){//still need to pass in argument with m
 }
         }
     }
-};
+}
 
 Hash::~Hash(){};
 

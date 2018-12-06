@@ -18,15 +18,10 @@ private:
     };
     HashNode * Table [TABLE_SIZE];
 public:
-
-    int hash (string &s);
-    int * getcollisions(void);
-
     Hash();
     void hash (string &s, int key);
     int * getcollisions(int numofdocs);
     ~Hash();
-
 };
 
 #endif
